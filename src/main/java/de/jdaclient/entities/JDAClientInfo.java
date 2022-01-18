@@ -10,23 +10,12 @@ public class JDAClientInfo implements JDAClient {
     private String username;
     private String avatar;
     private String discriminator;
-    private int flag;
+    private int flags;
     private String banner;
     private Color bannerColor;
     private Color accentColor;
 
     public JDAClientInfo() {}
-
-    private JDAClientInfo(Long id, String username, String avatar, String discriminator, int flag, String banner, Color bannerColor, Color accentColor) {
-        this.id = id;
-        this.username = username;
-        this.avatar = avatar;
-        this.discriminator = discriminator;
-        this.flag = flag;
-        this.banner = banner;
-        this.bannerColor = bannerColor;
-        this.accentColor = accentColor;
-    }
 
     @Override
     public Long getId() {
@@ -65,12 +54,12 @@ public class JDAClientInfo implements JDAClient {
     }
 
     @Override
-    public int getFlag() {
-        return flag;
+    public int getFlags() {
+        return flags;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 
     @Override
