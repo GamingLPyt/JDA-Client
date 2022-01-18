@@ -80,19 +80,23 @@ public class JDAClientBuilder {
         return jdaClientInfo;
     }
 
-    public void setId(String id) {
+    public JDAClientBuilder setId(String id) {
         this.id = Long.parseLong(id);
+        return this;
     }
 
-    public void setId(Long id) {
+    public JDAClientBuilder setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public void setApiVersion(String apiVersion) {
+    public JDAClientBuilder setApiVersion(String apiVersion) {
         this.apiVersion = apiVersion;
+        return this;
     }
 
-    public void setToken(String token) {
+    public JDAClientBuilder setToken(String token) {
         this.token = token;
+        return this;
     }
 }
