@@ -25,12 +25,13 @@ JDAClient jdaClient = jdaClientBuilder.buildUser();
 First start your Discord App and press CONTROL + SHIFT + i,<br>
 Now it will open the Discord integrated "Code Lookup",<br>
 Navigate to "Application" >> "Local Storage" >> "https://discord.com", you will see this:
+<br>
 ![Code Lookup](https://www.waveguard.dev/discord/jda-client/Code-Lookup.png)
-<br><br>
+<br><br><br>
 Search for your Discord Token, by entering in Filter "token",<br>
 Press CONTROL + r,to reload Discord.<br>
 Now you will see this:
+<br>
 ![Token Lookup](https://www.waveguard.dev/discord/jda-client/Lookup-Token.png)
-<br>
-<br>
+<br><br><br>
 Now copy the Value of your "token" and insert into the JDAClientBuilder().setToken("Your User Token");
