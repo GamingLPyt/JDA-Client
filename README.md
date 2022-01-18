@@ -1,7 +1,7 @@
 # JDA-Client
 JDA-Client is an updated Version from [DV8FromTheWorld/JDA-Client](https://github.com/DV8FromTheWorld/JDA-Client/)
 <br><br>
-## What can you do with that API?
+## What can you do with this API?
 With this API you can look up a specific user, 
 for example you can get their Discord#Tag, Creation date, 
 or Avatar url
