@@ -3,6 +3,7 @@ package de.jdaclient;
 import com.google.gson.JsonObject;
 import de.jdaclient.entities.JDAClientInfo;
 import de.jdaclient.entities.JDAClientSelfInfo;
+import de.jdaclient.utils.DiscordUtil;
 import de.jdaclient.utils.JSONParser;
 
 import java.awt.*;
@@ -37,6 +38,7 @@ public class JDAClientBuilder {
         jdaClientInfo.setUsername(jsonObject.get("username").getAsString());
         jdaClientInfo.setAvatar(jsonObject.get("avatar").getAsString());
         jdaClientInfo.setDiscriminator(jsonObject.get("discriminator").getAsString());
+        jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
         jdaClientInfo.setPublicFlags(jsonObject.get("public_flags").getAsInt());
         jdaClientInfo.setFlags(jsonObject.get("flags").getAsInt());
         jdaClientInfo.setPurchasedFlags(jsonObject.get("purchased_flags").getAsInt());
@@ -72,6 +74,7 @@ public class JDAClientBuilder {
         jdaClientInfo.setUsername(jsonObject.get("username").getAsString());
         jdaClientInfo.setAvatar(jsonObject.get("avatar").getAsString());
         jdaClientInfo.setDiscriminator(jsonObject.get("discriminator").getAsString());
+        jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
         jdaClientInfo.setFlags(jsonObject.get("flags").getAsInt());
         jdaClientInfo.setBanner(jsonObject.get("banner").getAsString());
         jdaClientInfo.setBannerColor(Color.decode(jsonObject.get("banner_color").getAsString()));

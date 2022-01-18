@@ -3,6 +3,7 @@ package de.jdaclient.entities;
 import de.jdaclient.JDAClient;
 
 import java.awt.*;
+import java.time.OffsetDateTime;
 
 public class JDAClientInfo implements JDAClient {
 
@@ -10,12 +11,14 @@ public class JDAClientInfo implements JDAClient {
     private String username;
     private String avatar;
     private String discriminator;
+    private OffsetDateTime creationTime;
     private int flags;
     private String banner;
     private Color bannerColor;
     private Color accentColor;
 
-    public JDAClientInfo() {}
+    public JDAClientInfo() {
+    }
 
     @Override
     public Long getId() {
@@ -51,6 +54,15 @@ public class JDAClientInfo implements JDAClient {
 
     public void setDiscriminator(String discriminator) {
         this.discriminator = discriminator;
+    }
+
+    @Override
+    public OffsetDateTime getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(OffsetDateTime creationTime) {
+        this.creationTime = creationTime;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package de.jdaclient;
 
 import java.awt.*;
+import java.time.OffsetDateTime;
 
 public interface JDAClient {
 
@@ -31,6 +32,13 @@ public interface JDAClient {
      * @return Discriminator as {@link String}
      */
     public String getDiscriminator();
+
+    /**
+     * The Creation-Time of the given User
+     *
+     * @return Creation-Time as {@link OffsetDateTime}
+     */
+    public OffsetDateTime getCreationTime();
 
     /**
      * The Flag that is connected with the User
