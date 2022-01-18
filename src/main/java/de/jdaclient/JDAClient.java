@@ -37,7 +37,7 @@ public interface JDAClient {
      *
      * @return Flag as {@link Integer}
      */
-    public int getFlag();
+    public int getFlags();
 
     /**
      * The Banner that is connected with the User
