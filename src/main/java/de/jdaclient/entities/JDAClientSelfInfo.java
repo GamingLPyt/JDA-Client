@@ -51,7 +51,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getAvatar() {
-        return avatar;
+        return "https://discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
     }
 
     public void setAvatar(String avatar) {
@@ -111,7 +111,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getBanner() {
-        return banner;
+        return "https://discordapp.com/banners/" + getId() + "/" + banner + ".png";
     }
 
     public void setBanner(String banner) {
