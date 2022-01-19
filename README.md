@@ -8,15 +8,15 @@ or Avatar url
 <br><br>
 ## How to use this API?
 ```java
-JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token").setApi("v9");
+JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token");
 JDAClient jdaClient = jdaClientBuilder.buildSelfUser();
 ```
 ```java
-JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token").setApi("v9").setId("User ID, from the User you want");
+JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token").setId("User ID, from the User you want");
 JDAClient jdaClient = jdaClientBuilder.buildUser();
 ```
 ```java
-JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token").setApi("v9").setId("User ID, from the User you want");
+JDAClientBuilder jdaClientBuilder = new JDAClientBuilder().setToken("Your User Token").setId("User ID, from the User you want");
 JDAClient jdaClientSelf = jdaClientBuilder.buildSelfUser();
 JDAClient jdaClient = jdaClientBuilder.buildUser();
 ```
