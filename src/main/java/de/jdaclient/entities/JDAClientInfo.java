@@ -12,7 +12,7 @@ public class JDAClientInfo implements JDAClient {
     private String avatar;
     private String discriminator;
     private OffsetDateTime creationTime;
-    private int flags;
+    private int publicFlags;
     private String banner;
     private Color bannerColor;
     private Color accentColor;
@@ -40,7 +40,7 @@ public class JDAClientInfo implements JDAClient {
 
     @Override
     public String getAvatar() {
-        return "https://discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
+        return "https://cdn.discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
     }
 
     public void setAvatar(String avatar) {
@@ -66,17 +66,17 @@ public class JDAClientInfo implements JDAClient {
     }
 
     @Override
-    public int getFlags() {
-        return flags;
+    public int getPublicFlags() {
+        return publicFlags;
     }
 
-    public void setFlags(int flags) {
-        this.flags = flags;
+    public void setPublicFlags(int publicFlags) {
+        this.publicFlags = publicFlags;
     }
 
     @Override
     public String getBanner() {
-        return "https://discordapp.com/banners/" + getId() + "/" + banner + ".png";
+        return "https://cdn.discordapp.com/banners/" + getId() + "/" + banner + ".png";
     }
 
     public void setBanner(String banner) {

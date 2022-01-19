@@ -4,13 +4,32 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 
-public class JSONParser {
+public class Request {
+
+    public static String getApiVersion() throws Exception {
+        URL url = new URL("https://discord.com");
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+        String line;
+        String html = null;
+
+        while ((line = br.readLine()) != null) {
+            html += line + "\n";
+        }
+
+        html = html.split("API_VERSION")[1];
+        html = html.split("WEBAPP_ENDPOINT")[0];
+        html = html.replace("\'", "");
+        html = html.substring(2, 3);
+
+        return html;
+    }
 
     public static JsonObject getJson(String url, String token) throws Exception {
         URL url1 = new URL(url);

@@ -51,7 +51,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getAvatar() {
-        return "https://discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
+        return "https://cdn.discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
     }
 
     public void setAvatar(String avatar) {
@@ -76,6 +76,7 @@ public class JDAClientSelfInfo implements JDAClient {
         this.creationTime = creationTime;
     }
 
+    @Override
     public int getPublicFlags() {
         return publicFlags;
     }
@@ -84,7 +85,6 @@ public class JDAClientSelfInfo implements JDAClient {
         this.publicFlags = publicFlags;
     }
 
-    @Override
     public int getFlags() {
         return flags;
     }
@@ -111,7 +111,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getBanner() {
-        return "https://discordapp.com/banners/" + getId() + "/" + banner + ".png";
+        return "https://cdn.discordapp.com/banners/" + getId() + "/" + banner + ".png";
     }
 
     public void setBanner(String banner) {
