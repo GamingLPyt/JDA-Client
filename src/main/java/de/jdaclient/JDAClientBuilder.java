@@ -4,8 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.jdaclient.entities.JDAClientInfo;
 import de.jdaclient.entities.JDAClientSelfInfo;
-import de.jdaclient.exceptions.InvalidTokenException;
-import de.jdaclient.exceptions.UnknownUserException;
 import de.jdaclient.utils.DiscordUtil;
 import de.jdaclient.utils.Request;
 import de.jdaclient.utils.enums.DiscordCode;
@@ -72,8 +70,8 @@ public class JDAClientBuilder {
             jdaClientInfo.setFlags(flags.isJsonNull() ? null : flags.getAsInt());
             jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? null : purchased_flags.getAsInt());
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
-            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
-            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
+            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : banner_color.getAsString());
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : accent_color.getAsInt());
             jdaClientInfo.setBio(bio.isJsonNull() ? null : bio.getAsString());
             jdaClientInfo.setLocale(locale.isJsonNull() ? null : locale.getAsString());
             jdaClientInfo.setNsfwAllowed(nsfw_allowed.isJsonNull() ? null : nsfw_allowed.getAsBoolean());
@@ -121,8 +119,8 @@ public class JDAClientBuilder {
             jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
             jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
-            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
-            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
+            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : banner_color.getAsString());
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : accent_color.getAsInt());
         } else {
             throw Objects.requireNonNull(jdaClientInfo.getApiCode().getException());
         }

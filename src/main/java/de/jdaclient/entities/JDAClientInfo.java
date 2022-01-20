@@ -15,8 +15,8 @@ public class JDAClientInfo implements JDAClient {
     private OffsetDateTime creationTime;
     private int publicFlags;
     private String banner;
-    private Color bannerColor;
-    private Color accentColor;
+    private String bannerColor;
+    private int accentColor;
     private DiscordCode apiCode;
 
     public JDAClientInfo() {
@@ -86,20 +86,20 @@ public class JDAClientInfo implements JDAClient {
     }
 
     @Override
-    public Color getBannerColor() {
+    public String getBannerColor() {
         return bannerColor;
     }
 
-    public void setBannerColor(Color bannerColor) {
+    public void setBannerColor(String bannerColor) {
         this.bannerColor = bannerColor;
     }
 
     @Override
-    public Color getAccentColor() {
+    public int getAccentColor() {
         return accentColor;
     }
 
-    public void setAccentColor(Color accentColor) {
+    public void setAccentColor(int accentColor) {
         this.accentColor = accentColor;
     }
 

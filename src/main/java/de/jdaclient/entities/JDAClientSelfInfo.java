@@ -18,8 +18,8 @@ public class JDAClientSelfInfo implements JDAClient {
     private int purchasedFlags;
     private int premiumUsageFlags;
     private String banner;
-    private Color bannerColor;
-    private Color accentColor;
+    private String bannerColor;
+    private int accentColor;
     private String bio;
     private String locale;
     private boolean nsfwAllowed;
@@ -121,20 +121,20 @@ public class JDAClientSelfInfo implements JDAClient {
     }
 
     @Override
-    public Color getBannerColor() {
+    public String getBannerColor() {
         return bannerColor;
     }
 
-    public void setBannerColor(Color bannerColor) {
+    public void setBannerColor(String bannerColor) {
         this.bannerColor = bannerColor;
     }
 
     @Override
-    public Color getAccentColor() {
+    public int getAccentColor() {
         return accentColor;
     }
 
-    public void setAccentColor(Color accentColor) {
+    public void setAccentColor(int accentColor) {
         this.accentColor = accentColor;
     }
 

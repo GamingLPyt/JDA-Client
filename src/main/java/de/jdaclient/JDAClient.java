@@ -59,16 +59,16 @@ public interface JDAClient {
     /**
      * The Color of the Banner that is connected with the User
      *
-     * @return Color of the Banner as {@link Color}
+     * @return Color of the Banner as {@link String}
      */
-    public Color getBannerColor();
+    public String getBannerColor();
 
     /**
      * The Accent-Color of the Banner that is connected with the User
      *
-     * @return Accent-Color of the Banner as {@link Color}
+     * @return Accent-Color of the Banner as {@link Integer}
      */
-    public Color getAccentColor();
+    public int getAccentColor();
 
     /**
      *
