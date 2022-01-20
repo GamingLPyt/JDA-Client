@@ -11,6 +11,7 @@ import de.jdaclient.utils.Request;
 import de.jdaclient.utils.enums.DiscordCode;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class JDAClientBuilder {
 
@@ -81,10 +82,8 @@ public class JDAClientBuilder {
             jdaClientInfo.setEmail(email.isJsonNull() ? null : email.getAsString());
             jdaClientInfo.setVerified(verified.isJsonNull() ? null : verified.getAsBoolean());
             jdaClientInfo.setPhone(phone.isJsonNull() ? null : phone.getAsString());
-        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNAUTHORIZED) {
-            throw new InvalidTokenException("The specified user token is not valid | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
-        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNKNOWN_USER) {
-            throw new UnknownUserException("The user you are looking for was not found | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        } else {
+            throw Objects.requireNonNull(jdaClientInfo.getApiCode().getException());
         }
 
         return jdaClientInfo;
@@ -124,10 +123,8 @@ public class JDAClientBuilder {
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
             jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
             jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
-        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNAUTHORIZED) {
-            throw new InvalidTokenException("The specified user token is not valid | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
-        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNKNOWN_USER) {
-            throw new UnknownUserException("The user you are looking for was not found | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        } else {
+            throw Objects.requireNonNull(jdaClientInfo.getApiCode().getException());
         }
 
         return jdaClientInfo;
