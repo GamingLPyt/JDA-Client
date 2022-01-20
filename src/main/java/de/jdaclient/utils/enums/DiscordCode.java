@@ -31,7 +31,7 @@ public enum DiscordCode {
         if (this.exception == InvalidTokenException.class) {
             return new InvalidTokenException(String.format("The specified user token is not valid | Discord >> message: %s <|> code: %s", message, code));
         } else if (this.exception == UnknownUserException.class) {
-            return new UnknownUserException(String.format("The specified user token is not valid | Discord >> message: %s <|> code: %s", message, code));
+            return new UnknownUserException(String.format("The given UserID is not valid | Discord >> message: %s <|> code: %s", message, code));
         }
 
         return null;
