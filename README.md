@@ -29,7 +29,7 @@ Navigate to "Application" >> "Local Storage" >> "https://discord.com", you will 
 ![Code Lookup](https://www.waveguard.dev/discord/jda-client/Code-Lookup.png)
 <br><br><br>
 Search for your Discord Token, by entering in Filter "token",<br>
-Press CONTROL + r,to reload Discord.<br>
+Press CONTROL + r, to reload Discord.<br>
 Now you will see this:
 <br><br>
 ![Token Lookup](https://www.waveguard.dev/discord/jda-client/Lookup-Token.png)
