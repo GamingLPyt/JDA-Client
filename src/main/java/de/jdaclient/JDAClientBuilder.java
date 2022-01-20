@@ -4,8 +4,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.jdaclient.entities.JDAClientInfo;
 import de.jdaclient.entities.JDAClientSelfInfo;
+import de.jdaclient.exceptions.InvalidTokenException;
+import de.jdaclient.exceptions.UnknownUserException;
 import de.jdaclient.utils.DiscordUtil;
 import de.jdaclient.utils.Request;
+import de.jdaclient.utils.enums.DiscordCode;
 
 import java.awt.*;
 
@@ -23,7 +26,8 @@ public class JDAClientBuilder {
     // Will be created
     protected JDAClient jdaClient = null;
 
-    public JDAClientBuilder() throws Exception {}
+    public JDAClientBuilder() throws Exception {
+    }
 
     // Building the JDAClient from the JDAClientSelfInfo
     public JDAClient buildSelfUser() throws Exception {
@@ -35,6 +39,7 @@ public class JDAClientBuilder {
         JsonObject jsonObject = Request.getJson("https://discord.com/api/v" + this.apiVersion + "/users/@me", this.token);
 
         // Setting up the JDAClient for the given User
+        JsonElement code = jsonObject.get("code");
         JsonElement id = jsonObject.get("id");
         JsonElement username = jsonObject.get("username");
         JsonElement avatar = jsonObject.get("avatar");
@@ -54,25 +59,33 @@ public class JDAClientBuilder {
         JsonElement verified = jsonObject.get("verified");
         JsonElement phone = jsonObject.get("phone");
 
-        jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
-        jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
-        jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
-        jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
-        jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
-        jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
-        jdaClientInfo.setFlags(flags.isJsonNull() ? null : flags.getAsInt());
-        jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? null : purchased_flags.getAsInt());
-        jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
-        jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
-        jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
-        jdaClientInfo.setBio(bio.isJsonNull() ? null : bio.getAsString());
-        jdaClientInfo.setLocale(locale.isJsonNull() ? null : locale.getAsString());
-        jdaClientInfo.setNsfwAllowed(nsfw_allowed.isJsonNull() ? null : nsfw_allowed.getAsBoolean());
-        jdaClientInfo.setMfaEnabled(mfa_enabled.isJsonNull() ? null : mfa_enabled.getAsBoolean());
-        jdaClientInfo.setPremiumType(premium_type.isJsonNull() ? null : premium_type.getAsInt());
-        jdaClientInfo.setEmail(email.isJsonNull() ? null : email.getAsString());
-        jdaClientInfo.setVerified(verified.isJsonNull() ? null : verified.getAsBoolean());
-        jdaClientInfo.setPhone(phone.isJsonNull() ? null : phone.getAsString());
+        jdaClientInfo.setApiCode(code.isJsonNull() ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
+
+        if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
+            jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
+            jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
+            jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
+            jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
+            jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
+            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
+            jdaClientInfo.setFlags(flags.isJsonNull() ? null : flags.getAsInt());
+            jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? null : purchased_flags.getAsInt());
+            jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
+            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
+            jdaClientInfo.setBio(bio.isJsonNull() ? null : bio.getAsString());
+            jdaClientInfo.setLocale(locale.isJsonNull() ? null : locale.getAsString());
+            jdaClientInfo.setNsfwAllowed(nsfw_allowed.isJsonNull() ? null : nsfw_allowed.getAsBoolean());
+            jdaClientInfo.setMfaEnabled(mfa_enabled.isJsonNull() ? null : mfa_enabled.getAsBoolean());
+            jdaClientInfo.setPremiumType(premium_type.isJsonNull() ? null : premium_type.getAsInt());
+            jdaClientInfo.setEmail(email.isJsonNull() ? null : email.getAsString());
+            jdaClientInfo.setVerified(verified.isJsonNull() ? null : verified.getAsBoolean());
+            jdaClientInfo.setPhone(phone.isJsonNull() ? null : phone.getAsString());
+        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNAUTHORIZED) {
+            throw new InvalidTokenException("The specified user token is not valid | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNKNOWN_USER) {
+            throw new UnknownUserException("The user you are looking for was not found | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        }
 
         return jdaClientInfo;
     }
@@ -89,6 +102,7 @@ public class JDAClientBuilder {
         JsonObject jsonObject = Request.getJson("https://discord.com/api/v" + this.apiVersion + "/users/" + this.id, this.token);
 
         // Setting up the JDAClient for the given User
+        JsonElement code = jsonObject.get("code");
         JsonElement id = jsonObject.get("id");
         JsonElement username = jsonObject.get("username");
         JsonElement avatar = jsonObject.get("avatar");
@@ -98,15 +112,23 @@ public class JDAClientBuilder {
         JsonElement banner_color = jsonObject.get("banner_color");
         JsonElement accent_color = jsonObject.get("accent_color");
 
-        jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
-        jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
-        jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
-        jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
-        jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
-        jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
-        jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
-        jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
-        jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
+        jdaClientInfo.setApiCode(code.isJsonNull() ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
+
+        if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
+            jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
+            jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
+            jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
+            jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
+            jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
+            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
+            jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
+            jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : Color.decode(banner_color.getAsString()));
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : Color.decode(accent_color.getAsString()));
+        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNAUTHORIZED) {
+            throw new InvalidTokenException("The specified user token is not valid | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        } else if (jdaClientInfo.getApiCode() == DiscordCode.UNKNOWN_USER) {
+            throw new UnknownUserException("The user you are looking for was not found | Discord >> message: " + jdaClientInfo.getApiCode().getMessage() + " <|> code: " + jdaClientInfo.getApiCode().getCode());
+        }
 
         return jdaClientInfo;
     }
