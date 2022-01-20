@@ -1,5 +1,7 @@
 package de.jdaclient;
 
+import de.jdaclient.utils.enums.DiscordCode;
+
 import java.awt.*;
 import java.time.OffsetDateTime;
 
@@ -67,4 +69,10 @@ public interface JDAClient {
      * @return Accent-Color of the Banner as {@link Color}
      */
     public Color getAccentColor();
+
+    /**
+     *
+     * @return Discord response Code with Message as Enum {@link DiscordCode}
+     */
+    public DiscordCode getApiCode();
 }

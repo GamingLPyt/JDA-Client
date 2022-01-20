@@ -1,6 +1,7 @@
 package de.jdaclient.entities;
 
 import de.jdaclient.JDAClient;
+import de.jdaclient.utils.enums.DiscordCode;
 
 import java.awt.*;
 import java.time.OffsetDateTime;
@@ -16,6 +17,7 @@ public class JDAClientInfo implements JDAClient {
     private String banner;
     private Color bannerColor;
     private Color accentColor;
+    private DiscordCode apiCode;
 
     public JDAClientInfo() {
     }
@@ -76,7 +78,7 @@ public class JDAClientInfo implements JDAClient {
 
     @Override
     public String getBanner() {
-        return "https://cdn.discordapp.com/banners/" + getId() + "/" + banner + ".png";
+        return banner == null ? null : "https://cdn.discordapp.com/banners/" + getId() + "/" + banner + ".png";
     }
 
     public void setBanner(String banner) {
@@ -99,5 +101,14 @@ public class JDAClientInfo implements JDAClient {
 
     public void setAccentColor(Color accentColor) {
         this.accentColor = accentColor;
+    }
+
+    @Override
+    public DiscordCode getApiCode() {
+        return apiCode;
+    }
+
+    public void setApiCode(DiscordCode apiCode) {
+        this.apiCode = apiCode;
     }
 }
