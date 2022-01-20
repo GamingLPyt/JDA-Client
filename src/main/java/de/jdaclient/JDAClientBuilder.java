@@ -60,7 +60,7 @@ public class JDAClientBuilder {
         JsonElement verified = jsonObject.get("verified");
         JsonElement phone = jsonObject.get("phone");
 
-        jdaClientInfo.setApiCode(code.isJsonNull() ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
+        jdaClientInfo.setApiCode(code == null ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
 
         if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
             jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
@@ -111,7 +111,7 @@ public class JDAClientBuilder {
         JsonElement banner_color = jsonObject.get("banner_color");
         JsonElement accent_color = jsonObject.get("accent_color");
 
-        jdaClientInfo.setApiCode(code.isJsonNull() ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
+        jdaClientInfo.setApiCode(code == null ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
 
         if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
             jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
