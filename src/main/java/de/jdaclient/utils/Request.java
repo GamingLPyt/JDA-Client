@@ -12,23 +12,30 @@ import java.net.URL;
 
 public class Request {
 
-    public static String getApiVersion() throws Exception {
-        URL url = new URL("https://discord.com");
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-        String line;
-        String html = null;
+    private static String apiVersion = null;
 
-        while ((line = br.readLine()) != null) {
-            html += line + "\n";
+    public static String getApiVersion() throws Exception {
+        if (apiVersion == null) {
+            URL url = new URL("https://discord.com");
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String line;
+            String html = null;
+
+            while ((line = br.readLine()) != null) {
+                html += line + "\n";
+            }
+
+            html = html.split("API_VERSION")[1];
+            html = html.split("WEBAPP_ENDPOINT")[0];
+            html = html.replace("\'", "");
+            html = html.substring(2, 3);
+
+            apiVersion = html;
         }
 
-        html = html.split("API_VERSION")[1];
-        html = html.split("WEBAPP_ENDPOINT")[0];
-        html = html.replace("\'", "");
-        html = html.substring(2, 3);
-
-        return html;
+        return apiVersion;
     }
 
     public static JsonObject getJson(String url, String token) throws Exception {

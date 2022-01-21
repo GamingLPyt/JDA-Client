@@ -1,6 +1,7 @@
 package de.jdaclient;
 
 import de.jdaclient.utils.enums.DiscordCode;
+import de.jdaclient.utils.enums.PublicFlags;
 
 import java.awt.*;
 import java.time.OffsetDateTime;
@@ -45,9 +46,9 @@ public interface JDAClient {
     /**
      * The Flag that is connected with the User
      *
-     * @return Flag as {@link Integer}
+     * @return Flag as {@link PublicFlags}
      */
-    public int getPublicFlags();
+    public PublicFlags getPublicFlags();
 
     /**
      * The Banner that is connected with the User

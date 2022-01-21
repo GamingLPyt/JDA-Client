@@ -7,8 +7,8 @@ import de.jdaclient.entities.JDAClientSelfInfo;
 import de.jdaclient.utils.DiscordUtil;
 import de.jdaclient.utils.Request;
 import de.jdaclient.utils.enums.DiscordCode;
+import de.jdaclient.utils.enums.PublicFlags;
 
-import java.awt.*;
 import java.util.Objects;
 
 public class JDAClientBuilder {
@@ -61,24 +61,24 @@ public class JDAClientBuilder {
         jdaClientInfo.setApiCode(code == null ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
 
         if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
-            jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
+            jdaClientInfo.setId(id.isJsonNull() ? -1L : id.getAsLong());
             jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
             jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
             jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
             jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
-            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
-            jdaClientInfo.setFlags(flags.isJsonNull() ? null : flags.getAsInt());
-            jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? null : purchased_flags.getAsInt());
+            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? PublicFlags.NONE : PublicFlags.getFlagById(public_flags.getAsInt()));
+            jdaClientInfo.setFlags(flags.isJsonNull() ? -1 : flags.getAsInt());
+            jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? -1 : purchased_flags.getAsInt());
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
             jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : banner_color.getAsString());
-            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : accent_color.getAsInt());
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? -1 : accent_color.getAsInt());
             jdaClientInfo.setBio(bio.isJsonNull() ? null : bio.getAsString());
             jdaClientInfo.setLocale(locale.isJsonNull() ? null : locale.getAsString());
-            jdaClientInfo.setNsfwAllowed(nsfw_allowed.isJsonNull() ? null : nsfw_allowed.getAsBoolean());
-            jdaClientInfo.setMfaEnabled(mfa_enabled.isJsonNull() ? null : mfa_enabled.getAsBoolean());
-            jdaClientInfo.setPremiumType(premium_type.isJsonNull() ? null : premium_type.getAsInt());
+            jdaClientInfo.setNsfwAllowed(!nsfw_allowed.isJsonNull() && nsfw_allowed.getAsBoolean());
+            jdaClientInfo.setMfaEnabled(!mfa_enabled.isJsonNull() && mfa_enabled.getAsBoolean());
+            jdaClientInfo.setPremiumType(premium_type.isJsonNull() ? -1 : premium_type.getAsInt());
             jdaClientInfo.setEmail(email.isJsonNull() ? null : email.getAsString());
-            jdaClientInfo.setVerified(verified.isJsonNull() ? null : verified.getAsBoolean());
+            jdaClientInfo.setVerified(!verified.isJsonNull() && verified.getAsBoolean());
             jdaClientInfo.setPhone(phone.isJsonNull() ? null : phone.getAsString());
         } else {
             throw Objects.requireNonNull(jdaClientInfo.getApiCode().getException());
@@ -112,15 +112,15 @@ public class JDAClientBuilder {
         jdaClientInfo.setApiCode(code == null ? DiscordCode.OK : DiscordCode.getFromCode(code.getAsInt()));
 
         if (jdaClientInfo.getApiCode() == DiscordCode.OK) {
-            jdaClientInfo.setId(id.isJsonNull() ? null : id.getAsLong());
+            jdaClientInfo.setId(id.isJsonNull() ? -1L : id.getAsLong());
             jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
             jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
             jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
             jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
-            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? null : public_flags.getAsInt());
+            jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? PublicFlags.NONE : PublicFlags.getFlagById(public_flags.getAsInt()));
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
             jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : banner_color.getAsString());
-            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? null : accent_color.getAsInt());
+            jdaClientInfo.setAccentColor(accent_color.isJsonNull() ? -1 : accent_color.getAsInt());
         } else {
             throw Objects.requireNonNull(jdaClientInfo.getApiCode().getException());
         }

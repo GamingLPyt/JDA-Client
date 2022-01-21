@@ -2,6 +2,7 @@ package de.jdaclient.entities;
 
 import de.jdaclient.JDAClient;
 import de.jdaclient.utils.enums.DiscordCode;
+import de.jdaclient.utils.enums.PublicFlags;
 
 import java.awt.*;
 import java.time.OffsetDateTime;
@@ -13,7 +14,7 @@ public class JDAClientInfo implements JDAClient {
     private String avatar;
     private String discriminator;
     private OffsetDateTime creationTime;
-    private int publicFlags;
+    private PublicFlags publicFlags;
     private String banner;
     private String bannerColor;
     private int accentColor;
@@ -68,11 +69,11 @@ public class JDAClientInfo implements JDAClient {
     }
 
     @Override
-    public int getPublicFlags() {
+    public PublicFlags getPublicFlags() {
         return publicFlags;
     }
 
-    public void setPublicFlags(int publicFlags) {
+    public void setPublicFlags(PublicFlags publicFlags) {
         this.publicFlags = publicFlags;
     }
 
