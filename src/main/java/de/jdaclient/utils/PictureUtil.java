@@ -10,6 +10,6 @@ public class PictureUtil {
     }
 
     public static boolean isGif(String pictureID) {
-        return pictureID.startsWith("_a");
+        return pictureID.startsWith("a_");
     }
 }
