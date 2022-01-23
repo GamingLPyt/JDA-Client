@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import de.jdaclient.entities.JDAClientInfo;
 import de.jdaclient.entities.JDAClientSelfInfo;
-import de.jdaclient.utils.DiscordUtil;
+import de.jdaclient.utils.DiscordTimeUtil;
 import de.jdaclient.utils.Request;
 import de.jdaclient.utils.enums.DiscordCode;
 import de.jdaclient.utils.enums.PublicFlags;
@@ -65,7 +65,7 @@ public class JDAClientBuilder {
             jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
             jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
             jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
-            jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
+            jdaClientInfo.setCreationTime(DiscordTimeUtil.getCreationDate(jdaClientInfo.getId()));
             jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? PublicFlags.NONE : PublicFlags.getFlagById(public_flags.getAsInt()));
             jdaClientInfo.setFlags(flags.isJsonNull() ? -1 : flags.getAsInt());
             jdaClientInfo.setPurchasedFlags(purchased_flags.isJsonNull() ? -1 : purchased_flags.getAsInt());
@@ -116,7 +116,7 @@ public class JDAClientBuilder {
             jdaClientInfo.setUsername(username.isJsonNull() ? null : username.getAsString());
             jdaClientInfo.setAvatar(avatar.isJsonNull() ? null : avatar.getAsString());
             jdaClientInfo.setDiscriminator(discriminator.isJsonNull() ? null : discriminator.getAsString());
-            jdaClientInfo.setCreationTime(DiscordUtil.getCreationDate(jdaClientInfo.getId()));
+            jdaClientInfo.setCreationTime(DiscordTimeUtil.getCreationDate(jdaClientInfo.getId()));
             jdaClientInfo.setPublicFlags(public_flags.isJsonNull() ? PublicFlags.NONE : PublicFlags.getFlagById(public_flags.getAsInt()));
             jdaClientInfo.setBanner(banner.isJsonNull() ? null : banner.getAsString());
             jdaClientInfo.setBannerColor(banner_color.isJsonNull() ? null : banner_color.getAsString());

@@ -1,10 +1,11 @@
 package de.jdaclient.entities;
 
 import de.jdaclient.JDAClient;
+import de.jdaclient.utils.PictureUtil;
 import de.jdaclient.utils.enums.DiscordCode;
+import de.jdaclient.utils.enums.PictureType;
 import de.jdaclient.utils.enums.PublicFlags;
 
-import java.awt.*;
 import java.time.OffsetDateTime;
 
 public class JDAClientSelfInfo implements JDAClient {
@@ -54,7 +55,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getAvatar() {
-        return "https://cdn.discordapp.com/avatars/" + getId() + "/" + avatar + ".png";
+        return PictureUtil.getDiscordPicture(getId(), avatar, PictureType.AVATAR);
     }
 
     public void setAvatar(String avatar) {
@@ -114,7 +115,7 @@ public class JDAClientSelfInfo implements JDAClient {
 
     @Override
     public String getBanner() {
-        return banner == null ? null : "https://cdn.discordapp.com/banners/" + getId() + "/" + banner + ".png";
+        return PictureUtil.getDiscordPicture(getId(), banner, PictureType.BANNER);
     }
 
     public void setBanner(String banner) {

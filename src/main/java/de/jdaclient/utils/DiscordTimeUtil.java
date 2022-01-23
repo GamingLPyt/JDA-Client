@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-public class DiscordUtil {
+public class DiscordTimeUtil {
 
     /**
      * This class comes from the original Discord JDA
