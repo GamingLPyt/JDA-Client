@@ -5,6 +5,8 @@ JDA-Client is an updated Version from [DV8FromTheWorld/JDA-Client](https://githu
 With this API you can look up a specific user, 
 for example you can get their Discord#Tag, Creation date, 
 or Avatar url
+<br>
+You can try it [here](https://www.waveguard.dev:8082/discord/user?id=331080562238423040)
 <br><br>
 ## How to use this API?
 ```java
